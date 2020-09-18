@@ -1,4 +1,6 @@
 'use strict'
 
-export const NODE_ENV = '"production"'
-export const API_ENDPOINT = '"http://localhost:5000"'
+module.exports = {
+    NODE_ENV: '"production"',
+    API_ENDPOINT: '"http://localhost:5000/api/"'
+}

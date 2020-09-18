@@ -5,7 +5,18 @@
 </template>
 
 <script>
+import WeightInsertion from '@/api-services/weight-insertion.js'
+
 export default {
-  name: 'DataInsertion'
+  name: 'DataInsertion',
+
+  mounted () {
+    WeightInsertion.insertWeights()
+      .then((response) => {
+        console.log('wack')
+      }).catch((error) => {
+        console.log('The data hasn\'t been loaded', error)
+      })
+  }
 }
 </script>
