@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Linq;
-using System.Net;
 using System.Net.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -48,9 +47,8 @@ namespace W8TrackrApi.Controllers
         public IActionResult Post([FromBody] WeightInstance weight)
         {
             _logger.LogInformation($"post done naow {DateTime.UtcNow.ToLongTimeString()}");
-            _logger.LogInformation($"post content {weight}");
-            _logger.LogInformation($"post content {weight.Date}");
-            _logger.LogInformation($"post content {weight.Weight}");
+            _logger.LogInformation($"content date {weight.Date}");
+            _logger.LogInformation($"content weight {weight.Weight}");
             
             // do stuff
             return Ok("lmao");
