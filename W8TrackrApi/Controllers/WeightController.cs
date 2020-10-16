@@ -12,9 +12,9 @@ namespace W8TrackrApi.Controllers
     [Route("api/[controller]")]
     public class WeightController : ControllerBase
     {
-        private static readonly string[] Summaries = new[]
+        private static readonly double[] weights = new[]
         {
-            "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
+            10.0, 20.0, 56.0, 12.0
         };
 
         private readonly ILogger<WeightController> _logger;
@@ -22,23 +22,29 @@ namespace W8TrackrApi.Controllers
         public WeightController(ILogger<WeightController> logger)
         {
             _logger = logger;
+            
+            _logger.LogInformation($"constructed naow {DateTime.UtcNow.ToLongTimeString()}");
         }
 
         [HttpGet]
-        public IEnumerable<WeatherForecast> Get()
+        public IEnumerable<WeightInstance> Get()
         {
+            _logger.LogInformation($"get request naow {DateTime.UtcNow.ToLongTimeString()}");
+
             var rng = new Random();
-            return Enumerable.Range(1, 5).Select(index => new WeatherForecast
+            return Enumerable.Range(1, 5).Select(index => new WeightInstance
             {
                 Date = DateTime.Now.AddDays(index),
-                TemperatureC = rng.Next(-20, 55),
-                Summary = Summaries[rng.Next(Summaries.Length)]
+                Weight = weights[rng.Next(weights.Length)]
             }).ToArray();
         }
 
         [HttpPost("{weight}")]
         public void Post(float weight)
         {
+            _logger.LogInformation($"post done naow {DateTime.UtcNow.ToLongTimeString()}");
+            _logger.LogInformation($"post content {weight}");
+            
             // do stuff
         }
     }

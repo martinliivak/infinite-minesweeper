@@ -21,6 +21,11 @@ namespace W8TrackrApi
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();
-                });
+                })
+                //.ConfigureLogging(logging => 
+                //{
+                    
+                //})
+                ;
     }
 }
