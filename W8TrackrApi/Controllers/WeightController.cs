@@ -1,6 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
+using System.Net;
+using System.Net.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
@@ -27,25 +28,32 @@ namespace W8TrackrApi.Controllers
         }
 
         [HttpGet]
-        public IEnumerable<WeightInstance> Get()
+        public IActionResult Get()
         {
             _logger.LogInformation($"get request naow {DateTime.UtcNow.ToLongTimeString()}");
 
             var rng = new Random();
-            return Enumerable.Range(1, 5).Select(index => new WeightInstance
+            WeightInstance[] weightInstances = Enumerable.Range(1, 5).Select(index => new WeightInstance
             {
                 Date = DateTime.Now.AddDays(index),
                 Weight = weights[rng.Next(weights.Length)]
             }).ToArray();
+
+            //return NotFound();
+
+            return Ok(weightInstances);
         }
 
-        [HttpPost("{weight}")]
-        public void Post(float weight)
+        [HttpPost]
+        public IActionResult Post([FromBody] WeightInstance weight)
         {
             _logger.LogInformation($"post done naow {DateTime.UtcNow.ToLongTimeString()}");
             _logger.LogInformation($"post content {weight}");
+            _logger.LogInformation($"post content {weight.Date}");
+            _logger.LogInformation($"post content {weight.Weight}");
             
             // do stuff
+            return Ok("lmao");
         }
     }
 }
